@@ -4,6 +4,8 @@ import Cards from './InfoCards/Cards';
 import Service from './Services/Service';
 import Blog from './BlogSection/Blog';
 import Appointment from './MakeAppointment/Appointment';
+import Testimonial from './Testimonial/Testimonial';
+import Form from './ContactForm/Form';
 
 
 export default function Home() {
@@ -14,6 +16,8 @@ export default function Home() {
       <Service></Service>
       <Blog></Blog>
       <Appointment></Appointment>
+      <Testimonial></Testimonial>
+      <Form></Form>
     </div>
   )
 }

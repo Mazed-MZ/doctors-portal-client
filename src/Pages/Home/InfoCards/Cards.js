@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InfoCards from './InfoCards';
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function Cards() {
 
@@ -25,9 +27,14 @@ export default function Cards() {
             icon: 'https://icons-for-free.com/iconfiles/png/512/phone-131964784943439862.png',
             bgColor: 'bg-primary'
         }
-    ]
+    ];
+
+    useEffect(function () {
+      Aos.init({ duration: 1000 });
+    }, []);
+
   return (
-    <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-24'>
+    <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-24' data-aos="flip-up">
       {
         cardData.map(card => <InfoCards key={card.id} card={card}></InfoCards>)
       }

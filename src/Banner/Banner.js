@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function Banner() {
+
+  useEffect(function () {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
     <div>
-      <div className="hero shadow-2xl">
+      <div className="hero shadow-2xl" data-aos="fade-down">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
-            src="https://media.istockphoto.com/id/1137049930/photo/stethoscope-or-phonendoscope-on-a-doctors-white-desk-on-cloudy-morning-treatment-of-cold-or.jpg?s=612x612&w=0&k=20&c=H-teNt3is2cltZKlWDx2lXRMhkNyL_Y2-cf07tNGtOQ=" alt=""
+            src="https://i.ibb.co/gdZBL3s/chair.png" alt=""
             className="max-w-md rounded-lg"
           />
           <div>

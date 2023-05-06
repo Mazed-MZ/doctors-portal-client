@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 export default function Navbar() {
+
+  const {user,logout} = useContext(AuthContext);
+  console.log(user);
+
+  const handleLogOut = () =>{
+    logout()
+    .then(()=>{})
+  }
 
     const manuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/appointment">Appointment</Link></li>
         <li><Link to="/about">About</Link></li>
-        <li><Link to="/review">Reviews</Link></li>
         <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/login">Login</Link></li>
+        {user?.uid ?
+            <>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><button onClick={handleLogOut}>Sign out</button></li>
+            </>
+            : <li><Link to="/login">Login</Link></li>}
     </React.Fragment>
   return (
     <div>
@@ -47,7 +60,29 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
+
+          {/* dashboard drawer toggle button */}
+
+        <label tabIndex={2} htmlFor="dashboard-toggle" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+
+            {/* Cart icon */}
+
+          <div className="hidden lg:flex dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
@@ -76,7 +111,7 @@ export default function Navbar() {
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
                   <button className="btn btn-primary btn-block">
-                    View cart
+                    <Link to="/dashboard">View Cart</Link>
                   </button>
                 </div>
               </div>
@@ -85,7 +120,7 @@ export default function Navbar() {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="https://scontent.fdac24-3.fna.fbcdn.net/v/t39.30808-6/341893247_995564804743346_7135724916489164606_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH0P8wohe52FZGsAvS4GKU2bul3prRWy9tu6XemtFbL2xJU9AAOYiMCUHITMakbUSIVcnhT673aL0TKhI1_Ju50&_nc_ohc=hGVSIn5bNTQAX8VfqPZ&_nc_ht=scontent.fdac24-3.fna&oh=00_AfBx8bCl3ab0d3fWwwM1ZemYTHH3QxYxyVa5z3D0Oi3khg&oe=644A97B0"/>
+                <img src="" alt=""/>
               </div>
             </label>
             <ul
@@ -102,7 +137,7 @@ export default function Navbar() {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                {user?.uid ? <button className="btn btn-slate-800 text-white" onClick={handleLogOut}>Logout</button>:<button className="btn bg-cyan-300 text-black"><a href="/login">Login</a></button>}
               </li>
             </ul>
           </div>
